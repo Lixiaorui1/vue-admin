@@ -592,3 +592,8 @@
 .el-tooltip {
   @include safariElli;
 }
+
+// 抽屉
+.el-drawer__wrapper {
+  color: #172b4d;
+}

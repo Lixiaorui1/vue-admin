@@ -242,7 +242,7 @@ export default {
       tr {
         th {
           padding: 0;
-          background-color: #f2f3f7;
+          background-color: var(--tableHeadColor);
           font-family: PingFangSC-Semibold;
           font-size: 14px;
           font-weight: 600;

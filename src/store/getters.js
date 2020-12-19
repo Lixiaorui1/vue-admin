@@ -1,4 +1,6 @@
 const getters = {
-  isRouterShow: state => state.app.isRouterShow
+  isRouterShow: state => state.app.isRouterShow,
+  themeColor: state => state.app.themeColor,
+  defultTheme: state => state.app.defultTheme
 };
 export default getters;

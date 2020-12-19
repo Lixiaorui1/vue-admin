@@ -12,42 +12,33 @@
         {{ UserName }}<i class="el-icon-caret-bottom"></i>
       </span>
       <el-dropdown-menu slot="dropdown" class="dropdown_menu">
+        <el-dropdown-item command="themeColor">自定义颜色</el-dropdown-item>
         <el-dropdown-item command="loginout">退出登录</el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>
+    <color-draw :visible.sync="drawer"></color-draw>
   </div>
 </template>
 <script>
 import { getCookie, setCookie } from "@/utils/auth";
 import { logout } from "@/api/user";
+import { PREDEFINE_COLORS, OPTIONS } from "../const";
+import colorDraw from "./colorDraw";
+import ColorDraw from "./colorDraw.vue";
 export default {
   computed: {
     roleType() {
       return this.$store.state.user.roleType;
-    },
-    myIntergral() {
-      return this.$store.state.inegral.myIntergral;
     }
   },
+  components: { colorDraw },
   data() {
     return {
       GameType: "0",
       UserName: getCookie("UserName"),
       RoleName: "",
-      options: [
-        {
-          value: "1",
-          label: "管理员"
-        },
-        {
-          value: "2",
-          label: "普通员工"
-        },
-        {
-          value: "3",
-          label: "代理商"
-        }
-      ]
+      drawer: false,
+      options: OPTIONS
     };
   },
   created() {
@@ -68,16 +59,21 @@ export default {
   },
   methods: {
     async logout() {
-      // setCookie("oauthlt", false);
       setCookie("st-cookie", "");
       await logout();
       await this.$store.dispatch("user/resetToken");
       this.$router.push(`/login?redirect=${this.$route.fullPath}`);
     },
+    checkColor() {
+      console.log(1);
+      this.drawer = true;
+    },
     handleCommeand(val) {
-      if (val === "loginout") {
-        this.logout();
-      }
+      const obj = {
+        loginout: this.logout,
+        themeColor: this.checkColor
+      };
+      obj[val]();
     }
   }
 };
@@ -140,6 +136,14 @@ export default {
       color: #fff;
     }
   }
+  .color_draw {
+    .color_txt {
+      line-height: 1;
+      position: relative;
+      top: -14px;
+      left: 12px;
+    }
+  }
 }
 .dropdown_menu {
   margin-top: 0 !important;
@@ -148,6 +152,7 @@ export default {
     width: 96px;
     height: 44px;
     line-height: 44px;
+    padding: 0 14px;
     text-align: center;
     font-family: PingFangSC-Regular;
     font-size: 12px;

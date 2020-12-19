@@ -8,9 +8,7 @@
 
 <script>
 import { appMain, homebar, sidebar } from "./components";
-import ResizeMixin from "./mixin/resizeHandler";
 import "mutationobserver-shim";
-import cssVars from "css-vars-ponyfill";
 
 export default {
   name: "Layout",
@@ -19,7 +17,6 @@ export default {
     sidebar,
     appMain
   },
-  mixins: [ResizeMixin],
   computed: {
     device() {
       return this.$store.state.app.device;
@@ -45,49 +42,6 @@ export default {
   watch: {
     roleType() {
       this.setTheme();
-    }
-  },
-  created() {
-    this.setTheme();
-  },
-  methods: {
-    setTheme() {
-      let root = document.querySelector(":root");
-      if (this.roleType === 0) {
-        cssVars({
-          variables: {
-            "--themeColor": "#06367C",
-            "--btHoverColor": "#3B5284",
-            "--btActiveColor": "#3B5284",
-            "--hoverColor": "#E7E8ED",
-            "--tableHeadColor": "#f2f3f7",
-            "--fontThemeColor": "#0266CC"
-          }
-        });
-        root.style.setProperty("--themeColor", "#06367C");
-        root.style.setProperty("--btHoverColor", "#3B5284");
-        root.style.setProperty("--btActiveColor", "#3B5284");
-        root.style.setProperty("--hoverColor", "#E7E8ED");
-        root.style.setProperty("--tableHeadColor", "#f2f3f7");
-        root.style.setProperty("--fontThemeColor", "#0266CC");
-      } else {
-        cssVars({
-          variables: {
-            "--themeColor": "#a80100",
-            "--btHoverColor": "#c40d0c",
-            "--btActiveColor": "#8b0100",
-            "--hoverColor": "#f8e2e1",
-            "--tableHeadColor": "#f8f5f5",
-            "--fontThemeColor": "#a80100"
-          }
-        });
-        root.style.setProperty("--themeColor", "#a80100");
-        root.style.setProperty("--btHoverColor", "#c40d0c");
-        root.style.setProperty("--btActiveColor", "#8b0100");
-        root.style.setProperty("--hoverColor", "#f8e2e1");
-        root.style.setProperty("--tableHeadColor", "#f8f5f5");
-        root.style.setProperty("--fontThemeColor", "#a80100");
-      }
     }
   }
 };

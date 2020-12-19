@@ -1,18 +1,20 @@
 <template>
-  <page-table
-    :tableData="tableData"
-    :total="total"
-    :featchData="featchData"
-    ref="pageTable"
-    :defaultSort="{ prop: 'age', order: 'descending' }"
-    :tableColumns="tableColumns"
-    @pageChange="handlePageChange"
-    @sortChange="handleSortChange"
-  >
-    <template #edit="scope">
-      <el-button @click="detail(scope.row)">详细</el-button>
-    </template>
-  </page-table>
+  <div class="component_table">
+    <page-table
+      :tableData="tableData"
+      :total="total"
+      :featchData="featchData"
+      ref="pageTable"
+      :defaultSort="{ prop: 'age', order: 'descending' }"
+      :tableColumns="tableColumns"
+      @pageChange="handlePageChange"
+      @sortChange="handleSortChange"
+    >
+      <template #edit="scope">
+        <el-button @click="detail(scope.row)">详细</el-button>
+      </template>
+    </page-table>
+  </div>
 </template>
 
 <script>
@@ -70,4 +72,11 @@ export default {
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.component_table {
+  background: #ffffff;
+  box-shadow: 0 0 6px 0 rgba(0, 21, 41, 0.09);
+  border-radius: 4px;
+  padding: 20px;
+}
+</style>
