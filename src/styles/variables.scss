@@ -1,0 +1,8 @@
+$sideBarWidth: 196px;
+$headerHeight: 50px;
+// the :export directive is the magic sauce for webpack
+// https://www.bluematador.com/blog/how-to-share-variables-between-js-and-sass
+:export {
+  sideBarWidth: $sideBarWidth;
+  headerHeight: $headerHeight;
+}

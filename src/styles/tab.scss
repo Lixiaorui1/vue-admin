@@ -1,0 +1,40 @@
+// 标签页头
+.el_tabs_st {
+  .el-tabs__header {
+    margin: 0;
+  }
+  .el-tabs__nav-wrap {
+    height: 54px;
+    &::after {
+      height: 1px;
+      background-color: #e8e8e8;
+    }
+    .el-tabs__nav {
+      .el-tabs__active-bar {
+        // display: none;
+        bottom: 1px;
+        left: 16px;
+        width: 32px !important;
+        height: 3px;
+        background: #2e3f63;
+        border-radius: 1.5px;
+      }
+      .el-tabs__item {
+        position: relative;
+        height: 54px;
+        padding: 0 12px;
+        line-height: 54px;
+        font-family: PingFangSC-Semi;
+        font-size: 16px;
+        color: #777777;
+        font-weight: 600;
+        &.is-active {
+          color: #2e3f63;
+        }
+        &:hover {
+          color: #2e3f63;
+        }
+      }
+    }
+  }
+}
