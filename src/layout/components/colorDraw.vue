@@ -147,6 +147,7 @@ export default {
     },
     closed() {
       this.formData = _.cloneDeep(this.themeColor);
+      this.setTheme();
     },
     saveTheme() {
       this.$store.dispatch("app/setThemeColor", this.formData);
