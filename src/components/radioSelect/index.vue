@@ -94,7 +94,7 @@ export default {
     display: inline-block;
   }
   .el-radio:hover {
-    background: #e6edf6;
+    background: var(--hoverColor);
   }
 }
 .radio-select {
@@ -104,26 +104,25 @@ export default {
     display: inline-block;
   }
 
-  .screen-select-label:hover {
-    background: #dfe2e7;
-  }
-  .screen-select-label:focus {
+  .screen-select-label .screen-select-label:focus {
     background: #dfe2e7;
   }
   .screen-select-label {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    color: #172b4d;
     border-radius: 4px;
     line-height: 30px;
     padding: 0 8px 0 10px;
+
+    &:hover {
+      background: var(--hoverColor);
+    }
 
     .select-down {
       display: inline-block;
       vertical-align: middle;
       font-size: 12px;
-      color: #172b4d;
     }
     .select-label-name {
       text-overflow: ellipsis;
@@ -141,11 +140,14 @@ export default {
     }
   }
   .label-deep-color {
-    background: #06367c;
+    background: var(--themeColor);
     color: #fff;
+    .select-down {
+      color: #fff;
+    }
   }
   .label-deep-color:hover {
-    background: #06367c;
+    background: var(--themeColor);
   }
 }
 </style>

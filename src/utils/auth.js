@@ -16,11 +16,8 @@ export function setToken(token) {
 }
 
 export function removeToken() {
+  localStorage.removeItem("visitedViews");
   return Cookies.remove(TokenKey);
-}
-
-export function removePayIntergral() {
-  return Cookies.remove("payIntergral");
 }
 
 export function getCookie(name) {

@@ -114,7 +114,7 @@ export default {
   }
   .el-checkbox:hover,
   .screen-select-clear:hover {
-    background: #e6edf6;
+    background: var(--hoverColor);
   }
 }
 .multiple-select {
@@ -126,7 +126,7 @@ export default {
   }
 
   .screen-select-label:hover {
-    background: #dfe2e7;
+    background: var(--hoverColor);
   }
   .screen-select-label:focus {
     background: #dfe2e7;
@@ -135,7 +135,6 @@ export default {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    color: #172b4d;
     border-radius: 4px;
     line-height: 30px;
     padding: 0 8px 0 10px;
@@ -161,14 +160,14 @@ export default {
     }
   }
   .label-deep-color {
-    background: #06367c;
+    background: var(--themeColor);
     color: #fff;
     .select-down {
       color: #fff;
     }
   }
   .label-deep-color:hover {
-    background: #06367c;
+    background: var(--themeColor);
   }
 }
 </style>

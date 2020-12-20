@@ -6,7 +6,10 @@ const getDefaultState = () => {
     defultTheme: { ...DEFAULT_THEME_COLOR },
     themeColor: localStorage.getItem("themeColor")
       ? JSON.parse(localStorage.getItem("themeColor"))
-      : { ...DEFAULT_THEME_COLOR }
+      : { ...DEFAULT_THEME_COLOR },
+    visitedViews: localStorage.getItem("visitedViews")
+      ? JSON.parse(localStorage.getItem("visitedViews"))
+      : []
   };
 };
 
@@ -22,6 +25,25 @@ const mutations = {
   SET_THEME_COLOR: (state, data) => {
     state.themeColor = data;
     localStorage.setItem("themeColor", JSON.stringify(data));
+  },
+  ADD_VISITED_VIEWS: (state, data) => {
+    if (state.visitedViews.findIndex(item => item.path === data.path) === -1) {
+      state.visitedViews.push({
+        name: data.name,
+        path: data.path
+      });
+      localStorage.setItem("visitedViews", JSON.stringify(state.visitedViews));
+    }
+  },
+  DEL_VISITED_VIEWS: (state, data) => {
+    state.visitedViews = state.visitedViews.filter(
+      item => item.path !== data.path
+    );
+    localStorage.setItem("visitedViews", JSON.stringify(state.visitedViews));
+  },
+  SET_VISITED_VIEWS: (state, data) => {
+    state.visitedViews = data;
+    localStorage.setItem("visitedViews", JSON.stringify(state.visitedViews));
   }
 };
 
@@ -32,8 +54,17 @@ const actions = {
   setThemeColor({ commit }, data) {
     commit("SET_THEME_COLOR", data);
   },
-  resetThemeColor() {
+  resetThemeColor({ commit }) {
     commit("RESET_STATE");
+  },
+  addVisitedViews({ commit }, data) {
+    commit("ADD_VISITED_VIEWS", data);
+  },
+  delVisitedViews({ commit }, data) {
+    commit("DEL_VISITED_VIEWS", data);
+  },
+  setVisitedViews({ commit }, data) {
+    commit("SET_VISITED_VIEWS", data);
   }
 };
 

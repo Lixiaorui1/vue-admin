@@ -144,7 +144,6 @@ const actions = {
   resetToken({ commit }) {
     return new Promise(resolve => {
       removeToken(); // must remove  token  first
-      removePayIntergral(); // 移除积分消耗
       commit("RESET_STATE");
       resolve();
       resetRouter();

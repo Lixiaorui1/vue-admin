@@ -1,5 +1,9 @@
 <template>
   <div class="side_bar_container">
+    <div class="local_time">
+      {{ localTime }}
+      <div class="symbol" v-if="showSymbol">:</div>
+    </div>
     <el-menu
       class="el_menu_list"
       text-color="#404040"
@@ -21,13 +25,17 @@
 <script>
 import { USER_MENU } from "@/const";
 import siderbarItem from "./sidebarItem";
+import moment from "moment";
 export default {
   name: "Sidebar",
   components: { siderbarItem },
   data() {
     return {
       activeMenu: "",
-      openMenu: ""
+      openMenu: "",
+      time: null,
+      localTime: "",
+      showSymbol: false
     };
   },
   computed: {
@@ -48,21 +56,36 @@ export default {
       immediate: true
     }
   },
-  created() {},
+  created() {
+    this.timer = setInterval(() => {
+      this.getTime();
+      this.showSymbol = !this.showSymbol;
+    }, 1000);
+  },
+  beforeDestroy() {
+    if (this.timer) {
+      clearInterval(this.timer);
+    }
+  },
   methods: {
+    getTime() {
+      const week = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"][
+        Number(moment().format("e"))
+      ];
+      const date = moment().format("YYYY-MM-DD");
+      const hours = moment().format("HH");
+      const minutes = moment().format("mm");
+      this.localTime = `${date}, ${hours} ${minutes} ${week}`;
+    },
     select(index) {
-      if (this.activeMenu === index) {
-        this.isRouterShow = false;
-        this.$store.dispatch("app/setRouterShow", false);
-        this.$nextTick(() => {
-          this.$store.dispatch("app/setRouterShow", true);
-        });
-      } else {
-        this.activeMenu = index;
-      }
+      // if (this.activeMenu === index) {
+      this.$store.dispatch("app/setRouterShow", false);
       this.$nextTick(() => {
+        this.$store.dispatch("app/setRouterShow", true);
         document.title = this.$route.name;
       });
+      // }
+      this.activeMenu = index;
     }
   }
 };
@@ -78,9 +101,21 @@ export default {
   height: calc(100% - #{$headerHeight});
   background-color: #fff;
   box-shadow: 1px 0 6px 0 rgba(0, 21, 41, 0.09);
+  .local_time {
+    position: absolute;
+    z-index: 9;
+    top: 10px;
+    left: 19px;
+    font-size: 14px;
+    .symbol {
+      position: absolute;
+      left: 102px;
+      top: -1px;
+    }
+  }
   .el_menu_list {
     border: none;
-    padding: 16px 0;
+    padding: 35px 0 16px 0;
     box-sizing: border-box;
     .el-submenu__title {
       .iconfont {

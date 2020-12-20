@@ -2,7 +2,7 @@
   <el-container class="project_container">
     <homebar />
     <sidebar />
-    <app-main :isRouterShow="isRouterShow" />
+    <app-main />
   </el-container>
 </template>
 
@@ -16,28 +16,6 @@ export default {
     homebar,
     sidebar,
     appMain
-  },
-  computed: {
-    device() {
-      return this.$store.state.app.device;
-    },
-    fixedHeader() {
-      return this.$store.state.settings.fixedHeader;
-    },
-    roleType() {
-      return this.$store.state.user.roleType;
-    },
-    classObj() {
-      return {
-        mobile: this.device === "mobile"
-      };
-    }
-  },
-  data() {
-    return {
-      timer: null,
-      isRouterShow: true
-    };
   },
   watch: {
     roleType() {
