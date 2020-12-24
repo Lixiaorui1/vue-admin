@@ -40,6 +40,14 @@ export default [
               })
           }
         ]
+      },
+      {
+        path: "xlsx",
+        name: "excel表格",
+        component: () =>
+          import("@/views/component/xlsx").catch(err => {
+            errFunc(err);
+          })
       }
     ]
   }

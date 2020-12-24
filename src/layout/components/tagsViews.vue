@@ -92,7 +92,7 @@ export default {
       margin-left: 8px;
       display: none;
       position: absolute;
-      top: 5px;
+      top: 7px;
       right: 5px;
       &:hover {
         border-radius: 50%;
@@ -112,7 +112,7 @@ export default {
         border-radius: 50%;
         position: absolute;
         left: 7px;
-        top: 8px;
+        top: 11px;
       }
     }
   }

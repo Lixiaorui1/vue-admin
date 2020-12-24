@@ -8,11 +8,6 @@
 </template>
 
 <script>
-/*
- *@author: liujinming
- *@date: 2020-05-25 11:44:29
- *@description: 评论框的开发  附带@功能  datalist就是@的人员列表
- */
 import VueTribute from "vue-tribute";
 export default {
   props: {

@@ -40,11 +40,6 @@
               >
             </el-form-item>
           </el-form>
-          <div class="agent">
-            <el-button type="text" class="agent_btn" @click="agentLogin"
-              >代理商登录</el-button
-            >
-          </div>
         </div>
       </div>
     </div>
@@ -93,23 +88,18 @@ export default {
           this.$store
             .dispatch("user/login", this.loginForm)
             .then(res => {
-              if (res) {
-                this.$router.push("/notice");
-              }
+              this.$router.push("/");
             })
-            .catch(rej => {
+            .catch(err => {
+              console.log(err);
+            })
+            .finally(() => {
               this.isLogining = false;
             });
         } else {
           return false;
         }
       });
-    },
-    agentLogin() {
-      this.$store.dispatch("user/getAuthor");
-    },
-    enterUserSystem() {
-      window.location = window.location.origin;
     }
   }
 };
