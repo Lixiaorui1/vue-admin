@@ -1,4 +1,5 @@
 import XLSX from "xlsx";
+import _ from "lodash";
 /**
  * @description:
  * @param {Object} json 服务端发过来的数据
@@ -83,16 +84,19 @@ function _file(file, callback) {
       type: "binary"
     });
     /* Get first worksheet */
-    const wsname = wb.SheetNames[0];
+    const wsname = wb.SheetNames[14];
     const ws = wb.Sheets[wsname];
     /* Convert array of arrays */
     const data = XLSX.utils.sheet_to_json(ws, {
       header: 1
     });
+    const merges = ws["!merges"] || [];
     const html = XLSX.utils.sheet_to_html(ws);
-    console.log(wb);
+
+    const dataFromMerge = getDataFromMerges(data, merges);
+    console.log(ws, data, merges, dataFromMerge);
     /* Update state */
-    callback(data, make_cols(ws["!ref"]), html);
+    callback(dataFromMerge, make_cols(ws["!ref"]), html);
   };
   reader.readAsBinaryString(file);
 }
@@ -116,6 +120,20 @@ function getLength(obj) {
 /*
  *@description: 数据格式化
  *@data: excel数据
- *@returns : 格式化后的excel数据
+ *@returns : 获取格式化合并单元格后的excel数据
  */
-function formatData() {}
+function getDataFromMerges(data, merges) {
+  if (merges.length) {
+    const _data = _.cloneDeep(data);
+    merges.forEach(item => {
+      for (let i = item.s.c; i <= item.e.c; i++) {
+        for (let m = item.s.r; m <= item.e.r; m++) {
+          _data[m][i] = _data[item.s.r][item.s.c];
+        }
+      }
+    });
+    return _data;
+  } else {
+    return data;
+  }
+}

@@ -24,12 +24,10 @@ export default {
   },
   computed: {},
   watch: {},
-  created() {},
   beforeDestroy() {},
   methods: {
     importExcel() {
       importExcel((data, dataRef, html) => {
-        console.log(data, dataRef, html);
         this.data = data;
         this.tableHtml = html;
       });
